@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <stdio.h>
 #include "lib/text.h"
+#include "lib/man.cpp"
 
 void displayInfo()
 {
@@ -8,7 +9,7 @@ void displayInfo()
     int offsetX, offsetY;
     char usn1[] = "4NM16CS153",
          usn2[] = "4NM16CS151",
-         usn3[] = "4NM16CS152",
+         usn3[] = "4NM16CS15",
          name1[] = "SUDARSHAN BALIGA B",
          name2[] = "SRIHARI VISHNU",
          name3[] = "STALIN ROBO",
@@ -41,7 +42,7 @@ void displayInfo()
     draw_text(name3, posX + offsetX, posY, GLUT_BITMAP_HELVETICA_18);
     posY -= offsetY;
 
-   glColor3ub(91, 100, 249);
+    glColor3ub(91, 100, 249);
     offsetX = glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char *)title);
     draw_text(title, posX - 60, posY - 50, GLUT_BITMAP_TIMES_ROMAN_24);
 }
@@ -50,15 +51,19 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     displayInfo();
+   
+    Man m1(200, 200, 60, 30);
+    Man m2(250, 200, 100, 50);
     glFlush();
-}
+} 
 
 void on_resize(int w, int h)
-{
+{ 
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0, w, 0, h);
+    
 }
 
 void init(void)
@@ -66,6 +71,7 @@ void init(void)
     // glClearColor(0, 0.882, 0.827, 1);
     glClearColor(0, 0, 0, 1);
     glColor3f(1.0, 0.0, 0.0);
+    
     glPointSize(1.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
