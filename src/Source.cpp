@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "initDisplay.h"
 #include "man.h"
+#include "backgroundItems.h"
 
 int viewNumber;
 
@@ -15,9 +16,11 @@ void changeViewPort(int w, int h)
 
 void disp()
 {
-	drawMan();
+	drawBackground(350);
+	drawRiver(250);
 	jumpAction();
-	glFlush();
+	drawMan();
+	riverMask(200);
 }
 
 void render()
@@ -27,7 +30,7 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT);
 	if (viewNumber == 0)
 		displayInfo();
-	else if (viewNumber == 1)
+	else if (viewNumber)
 		disp();
 	glFlush();
 }
@@ -35,15 +38,15 @@ void render()
 void keyFunc(unsigned char key, int x, int y)
 {
 	viewNumber += 1;
-	if(viewNumber == 1)
-		initMan(100, 100);
+	if(viewNumber)
+		initMan(500, 350);
 }
 
 void inits(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(1000, 1000);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Flood Rescue");
 	glutReshapeFunc(changeViewPort);

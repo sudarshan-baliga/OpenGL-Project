@@ -8,8 +8,8 @@ void displayInfo()
 		posY = glutGet(GLUT_WINDOW_HEIGHT) / 2.0 + 60,
 		textWidth;
 	int offsetX, offsetY = 30;
-	char usn[][11] = { "4NM16CS153", "4NM16CS151", "4NM16CS152", },
-		name[][19] = { "SUDARSHAN BALIGA B", "SRIHARIVISHNU", "STALIN ROBO" },
+	char usn[][11] = { "4NM16CS151", "4NM16CS152", "4NM16CS153" },
+		name[][19] = { "SRIHARIVISHNU", "STALIN ROBO", "SUDARSHAN BALIGA B" },
 		title[] = "RESCUE OPERATION USING HELICOPTER";
 
 	for (int i = 0; i < 3; ++i)
