@@ -1,6 +1,7 @@
 #include <GL/glut.h>
-
-int tailX, frontX, topY, botY, tailWidth, tailLength, segmentWidth, windSheildGap;
+#include <iostream>
+using namespace std;
+int tailX, frontX, topY, botY, tailWidth, tailLength, segmentWidth, windSheildGap, bladeLength, bladeWidth;
 
 void drawHelicopterSkeleton(int midX, int midY, int scale)
 {
@@ -35,7 +36,7 @@ void drawHelicopterSkeleton(int midX, int midY, int scale)
 
     //tailExtension
     glBegin(GL_POLYGON);
-    glVertex2f(tailX , midY + tailWidth / 5);
+    glVertex2f(tailX, midY + tailWidth / 5);
     glVertex2f(tailX + tailWidth / 5, midY + tailWidth);
     glVertex2f(tailX + tailWidth, midY + tailWidth);
     glVertex2f(tailX, midY - tailWidth / 5);
@@ -64,9 +65,26 @@ void drawHelicopterSkeleton(int midX, int midY, int scale)
     glEnd();
 }
 
-
+//make sure drawHelicopterSkeleton() is called first to set parameters
+void drawBlades()
+{
+    int translation = 3;
+    glColor3ub(0, 0, 0);
+    glBegin(GL_POLYGON);
+    glVertex2f(frontX + segmentWidth + segmentWidth / 2, topY + tailWidth);
+    glVertex2f(frontX + segmentWidth + segmentWidth / 2 - bladeLength, topY + bladeWidth - translation);
+    glVertex2f(frontX + segmentWidth + segmentWidth / 2 - bladeLength, topY + 1.5 * bladeWidth + translation);
+    glVertex2f(frontX + segmentWidth + segmentWidth / 2, topY + 1.5 * bladeWidth);
+    glVertex2f(frontX + segmentWidth + segmentWidth / 2 + bladeLength, topY + 1.5 * bladeWidth + translation);
+    glVertex2f(frontX + segmentWidth + segmentWidth / 2 + bladeLength, topY +  bladeWidth - translation);
+    glVertex2f(frontX + segmentWidth + segmentWidth / 3, topY + bladeWidth);
+    glEnd();
+}
 
 void drawHelicopter()
 {
     drawHelicopterSkeleton(700, 550, 500);
+    bladeLength = 500 / 4;
+    bladeWidth = tailWidth;
+    drawBlades();
 }
