@@ -3,6 +3,7 @@
 #include "lib/initDisplay.h"
 #include "lib/man.h"
 #include "lib/backgroundItems.h" 
+#include "lib/helicopter.h"
 
 int viewNumber;
 
@@ -21,6 +22,7 @@ void disp()
 	jumpAction();
 	drawMan();
 	riverMask(200);
+	drawHelicopter();
 }
 
 void render()
