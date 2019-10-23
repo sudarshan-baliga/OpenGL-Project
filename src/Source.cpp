@@ -1,8 +1,8 @@
-#include <GL\glut.h>
+#include <GL/glut.h>
 #include <stdio.h>
-#include "initDisplay.h"
-#include "man.h"
-#include "backgroundItems.h"
+#include "lib/initDisplay.h"
+#include "lib/man.h"
+#include "lib/backgroundItems.h" 
 
 int viewNumber;
 
