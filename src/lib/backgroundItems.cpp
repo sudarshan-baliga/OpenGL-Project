@@ -6,7 +6,6 @@ void drawRiver(int y)
 	glColor3f(0.17, 0.38, 0.49);
 	glRectd(0, 0, glutGet(GLUT_WINDOW_WIDTH), y);
 }
-
 void drawLand(int y)
 {
 	//glColor3f(0.6, 0.46, 0.32);

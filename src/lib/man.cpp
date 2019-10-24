@@ -19,7 +19,7 @@
 		head[2];
 //}man;
 	float direction, offset, distChange;
-	int onceRound;
+	int onceRound, handup = 0;
 
 void initMan(int x, int y)
 {
@@ -84,15 +84,20 @@ void drawMan()
 		legWidth,
 		legColor);
 
-	drawLimb(leftHandBottom[0], leftHandBottom[1] - offset,
-		posX - handWidth - handSpacing, posY + upperBodyHeight - offset,
-		leftElbow, (posY + upperBodyHeight + leftHandBottom[1] - offset - offset) / 2,
+
+	int temp = 0;
+	if (handup)
+		temp = handHeight;
+	
+	drawLimb(leftHandBottom[0], leftHandBottom[1] - offset + temp,
+		posX - handWidth - handSpacing, posY + upperBodyHeight - offset + temp,
+		leftElbow, (posY + upperBodyHeight + leftHandBottom[1] - offset - offset) / 2 + temp,
 		handWidth,
 		handColor);
-
-	drawLimb(rightHandBottom[0], rightHandBottom[1] - offset,
-		posX + upperBodyWidth + handSpacing, posY + upperBodyHeight - offset,
-		rightElbow, (posY + upperBodyHeight + rightHandBottom[1] - offset - offset) / 2,
+	
+	drawLimb(rightHandBottom[0], rightHandBottom[1] - offset + temp,
+		posX + upperBodyWidth + handSpacing, posY + upperBodyHeight - offset + temp,
+		rightElbow, (posY + upperBodyHeight + rightHandBottom[1] - offset - offset) / 2 + temp,
 		handWidth,
 		handColor);
 }
@@ -104,7 +109,7 @@ void riverMask(int y)
 	glRectd(leftElbow - handWidth, 0, rightElbow + handWidth, y);
 }
 
-void jumpAction()
+int jumpAction()
 {
 	if (direction < 20)
 	{
@@ -114,6 +119,7 @@ void jumpAction()
 		leftKnee -= 0.05;
 		direction += 0.05;
 		offset += 0.05;
+		return 0;
 	}
 	else if (direction < 39)
 	{
@@ -125,12 +131,15 @@ void jumpAction()
 		offset -= 0.1;
 		leftLegBottom[1] += 0.1;
 		rightLegBottom[1] += 0.1;
+		return 0;
 	}
 	else if (offset < 0)
 	{
+		handup = 1;
 		offset += 0.05;
 		leftLegBottom[1] -= 0.05;
 		rightLegBottom[1] -= 0.05;
+		return 0;
 	}
 	else if (onceRound)
 	{
@@ -145,12 +154,12 @@ void jumpAction()
 
 		offset = 0;
 		distChange = 0.5;
+		return 0;
 	}
-	else if (offset < 300)
-	{
-		offset += distChange;
-		leftLegBottom[1] -= distChange;
-		rightLegBottom[1] -= distChange;
-		distChange += 0.01;
-	}
+	else
+		return 1;
+}
+void setHandUp(int x)
+{
+	handup = x;
 }

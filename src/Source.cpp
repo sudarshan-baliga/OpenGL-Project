@@ -1,11 +1,12 @@
-#include <GL/glut.h>
+#include <GL\glut.h>
 #include <stdio.h>
-#include "lib/initDisplay.h"
-#include "lib/man.h"
-#include "lib/backgroundItems.h" 
-#include "lib/helicopter.h"
-
+#include "initDisplay.h"
+#include "man.h"
+#include "backgroundItems.h"
+#include "helicopter.h"
 int viewNumber;
+float timer = 0;
+int t1 = 1;
 
 void changeViewPort(int w, int h)
 {
@@ -15,14 +16,86 @@ void changeViewPort(int w, int h)
 	gluOrtho2D(0, w, 0, h);
 }
 
+int changePos()
+{
+	glPushMatrix();
+	glTranslated(250 - (timer++), 10 - (timer/5), 0);
+	if (timer == 250)
+		return 1;
+	return 0;
+}
+
+int changeManPos()
+{
+	glPushMatrix();
+	glTranslated((timer++)-100, 0, 0);
+	if (timer == 100)
+	{
+		timer = 0;
+		return 1;
+	}
+	return 0;
+}
+
+int changeFallPos()
+{
+	initMan(500, 350 - (timer++ / 2));
+	if (timer == 500)
+	{
+		timer = 0;
+		return 1;
+	}
+	return 0;
+}
+int pullMan()
+{
+	initMan(500, 100 + (timer++) / 2);
+	if (timer == 500)
+	{
+		timer = 0;
+		return 1;
+	}
+	return 0;
+}
+int flyAway()
+{
+	glPushMatrix();
+	glTranslated(-(timer++), 0, 0);
+	return 0;
+}
 void disp()
 {
 	drawBackground(350);
 	drawRiver(250);
-	jumpAction();
+
+	if (t1 == 1)
+		t1 += changeManPos();
+	else if (t1 == 2)
+		t1 += jumpAction();
+	else if (t1 == 3)
+		t1 += changeFallPos();
+	else if (t1 == 5)
+		t1 += pullMan();
+	else if (t1 == 6)
+		t1 += flyAway();
+
 	drawMan();
+	if (t1 == 1)
+		glPopMatrix();
+	
 	riverMask(200);
-	drawHelicopter();
+
+	if (t1 == 4)
+	{
+		t1 += changePos();
+		drawHelicopter();
+		glPopMatrix();
+	}
+	else if (t1 > 4)
+		drawHelicopter();
+
+	if (t1 == 6)
+		glPopMatrix();
 }
 
 void render()
