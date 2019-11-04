@@ -60,8 +60,9 @@ int pullMan()
 {
 	initMan(550, (timer += 0.25) / 2);
 	laddery = timer / 2 + 70;
-
-	if (timer == 800)
+	if(laddery > 505)
+		laddery = 505;
+	if (timer == 1000)
 	{
 		timer = 0;
 		return 1;
@@ -78,6 +79,7 @@ void drawLadder(int x, int y, int x1, int y1)
 	glVertex2f(x1, y1);
 	glEnd();
 }
+
 int flyAway()
 {
 	glPushMatrix();
@@ -100,10 +102,12 @@ void disp()
 		showLadder = 1;
 		t1 += pullMan();
 	}
-	else if (t1 == 6)
+	else if (t1 == 6) 
 		t1 += flyAway();
-
-	drawMan();
+	
+	if(t1 != 6)
+		drawMan();
+	
 	if (t1 == 1)
 		glPopMatrix();
 	if (t1 == 2 && firstChange == 1)
@@ -123,7 +127,8 @@ void disp()
 	else if (t1 > 4)
 	{
 		drawHelicopter();
-		drawLadder(550, laddery, 550, 520);
+		if(t1 != 6)
+			drawLadder(550, laddery, 550, 520);
 	}
 	if (t1 == 6)
 		glPopMatrix();
