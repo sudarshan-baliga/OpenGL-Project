@@ -88,13 +88,11 @@ void drawMan()
 	int temp = 0;
 	if (handup)
 		temp = handHeight;
-
 	drawLimb(leftHandBottom[0], leftHandBottom[1] - offset + temp,
 		posX - handWidth - handSpacing, posY + upperBodyHeight - offset + temp,
 		leftElbow, (posY + upperBodyHeight + leftHandBottom[1] - offset - offset) / 2 + temp,
 		handWidth,
 		handColor);
-
 	drawLimb(rightHandBottom[0], rightHandBottom[1] - offset + temp,
 		posX + upperBodyWidth + handSpacing, posY + upperBodyHeight - offset + temp,
 		rightElbow, (posY + upperBodyHeight + rightHandBottom[1] - offset - offset) / 2 + temp,
