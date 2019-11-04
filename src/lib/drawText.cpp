@@ -1,5 +1,6 @@
 #include <GL/glut.h>
-#include <cstring> 
+#include <cstring>
+
 void draw_text(char *text, float x, float y, void *font)
 {
 	int textLen;
