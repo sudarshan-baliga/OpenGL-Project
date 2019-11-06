@@ -1,7 +1,22 @@
 #include <GL/glut.h>
 #include <iostream>
+#include <cmath>
 using namespace std;
 int tailX, frontX, topY, botY, tailWidth, tailLength, segmentWidth, windSheildGap, bladeLength, bladeWidth;
+bool showRescuer, showSurvivor;
+
+void drawCircle(float radius, int x, int y)
+{
+	//glColor3f(0.23, 0.7, 0.81);
+	glPointSize(3);
+	glBegin(GL_POINTS);
+	for (float i = 0; i < 2 * 3.14; i += 0.001)
+	{
+		glVertex2f(cos(i)*radius + x, 0.75*sin(i)*radius + y);
+	}
+	glEnd();
+	glPointSize(1);
+}
 
 void drawHelicopterSkeleton(int midX, int midY, int scale)
 {
@@ -41,6 +56,7 @@ void drawHelicopterSkeleton(int midX, int midY, int scale)
 	glVertex2f(tailX + tailWidth, midY + tailWidth);
 	glVertex2f(tailX, midY - tailWidth / 5);
 	glEnd();
+	
 	//windShields
 	glColor3ub(51, 79, 93);
 	glBegin(GL_POLYGON);
@@ -48,13 +64,58 @@ void drawHelicopterSkeleton(int midX, int midY, int scale)
 	glVertex2f(frontX + segmentWidth - windSheildGap / 2, topY - windSheildGap);
 	glVertex2f(frontX + segmentWidth - windSheildGap / 2, midY + windSheildGap);
 	glEnd();
+	//pilot
+	glColor3ub(0, 0, 1);
+	glBegin(GL_POLYGON);
+		glVertex2f(frontX + segmentWidth / 2 + 3, midY + windSheildGap);
+		glVertex2f(frontX + segmentWidth / 2 + 3, midY + windSheildGap + 15);
+		glVertex2f(frontX + segmentWidth - windSheildGap / 2 - 6, midY + windSheildGap + 15);
+		glVertex2f(frontX + segmentWidth - windSheildGap / 2 - 6, midY + windSheildGap);
+	glEnd();
+	//eyes
+	glColor3ub(255, 255, 255);
+	drawCircle(1, frontX + segmentWidth / 2 + 6, midY + 15);
+	drawCircle(1, frontX + segmentWidth - windSheildGap / 2 - 10, midY + 15);
+	glColor3ub(51, 79, 93);
+	
+	//windsheld 2
 	glBegin(GL_POLYGON);
 	glVertex2f(frontX + segmentWidth, topY - windSheildGap);
 	glVertex2f(frontX + 2 * segmentWidth - windSheildGap / 2, topY - windSheildGap);
 	glVertex2f(frontX + 2 * segmentWidth - windSheildGap / 2, midY + windSheildGap);
 	glVertex2f(frontX + segmentWidth, midY + windSheildGap);
 	glEnd();
-
+	if(showRescuer) 
+	{
+		//rescuer
+		glColor3ub(1, 0, 0);
+		glBegin(GL_POLYGON);
+			glVertex2f(frontX + segmentWidth  + 8 , midY + windSheildGap);
+			glVertex2f(frontX + segmentWidth  + 8, midY + windSheildGap + 15);
+			glVertex2f(frontX + segmentWidth  + 25, midY + windSheildGap + 15);
+			glVertex2f(frontX + segmentWidth  + 25, midY + windSheildGap);
+		glEnd();
+		//rescuer eyes
+		glColor3ub(255, 255, 255);
+		drawCircle(1, frontX + segmentWidth  + 14,  midY + windSheildGap + 8);
+		drawCircle(1, frontX + segmentWidth  + 24,  midY + windSheildGap + 8);
+		glColor3ub(51, 79, 93);
+	}
+	//survivor
+	if(showSurvivor)
+	{
+		glColor3ub(0, 0, 0);
+		glBegin(GL_POLYGON);
+			glVertex2f(frontX + segmentWidth  + 38 , midY + windSheildGap);
+			glVertex2f(frontX + segmentWidth  + 38, midY + windSheildGap + 15);
+			glVertex2f(frontX + segmentWidth  + 55, midY + windSheildGap + 15);
+			glVertex2f(frontX + segmentWidth  + 55, midY + windSheildGap);
+		glEnd();
+		// survivor eyes
+		glColor3ub(255, 255, 255);
+		drawCircle(1, frontX + segmentWidth  + 44,  midY + windSheildGap + 8);
+		drawCircle(1, frontX + segmentWidth  + 54,  midY + windSheildGap + 8);
+	}
 	//blade holder
 	glColor3ub(224, 223, 219);
 	glBegin(GL_POLYGON);

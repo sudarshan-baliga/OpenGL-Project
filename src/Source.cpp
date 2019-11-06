@@ -1,11 +1,11 @@
 #include <GL/glut.h>
 #include <stdio.h>
 #include <math.h>
-#include "initDisplay.h"
-#include "man.h"
-#include "man2.h"
-#include "backgroundItems.h"
-#include "helicopter.h"
+#include "lib/initDisplay.h"
+#include "lib/man.h"
+#include "lib/man2.h"
+#include "lib/backgroundItems.h"
+#include "lib/helicopter.h"
 int viewNumber;
 float timer = 0;
 int t1 = 1, firstChange = 1;
@@ -124,6 +124,7 @@ int pullMan()
 
 int dropLadder()
 {
+	showRescuer = false;
 	laddery = 600 - (timer += 0.25) / 2;
 	if (laddery < 175)
 	{
@@ -164,6 +165,8 @@ void drawLadder(int x, int y, int x1, int y1)
 
 int flyAway()
 {
+	showRescuer =true;
+	showSurvivor = true;
 	glPushMatrix();
 	glTranslated(-(timer += 0.25), 0, 0);
 	return 0;
@@ -175,6 +178,7 @@ void disp()
 
 	if (t1 == 1)
 	{
+		showRescuer = true;
 		t1 += changeManPos();
 		drawMan();
 	}
