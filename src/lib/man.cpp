@@ -2,24 +2,24 @@
 #include <math.h>
 //struct Man
 //{
-	float posX, posY,
-		headWidth = 25, headHeight = 25,
-		legWidth = 15, legGap = 2.5, legHeight = 40,
-		upperBodyHeight = 40, upperBodyWidth,
-		handWidth = 10, handSpacing = 2.5, handHeight = 30,
-		headSpace = 2.5;
+float posX, posY,
+headWidth = 25, headHeight = 25,
+legWidth = 15, legGap = 2.5, legHeight = 40,
+upperBodyHeight = 40, upperBodyWidth,
+handWidth = 10, handSpacing = 2.5, handHeight = 30,
+headSpace = 2.5;
 
-	int legColor[3] = { 1, 0, 0 }, handColor[3] = { 0, 1, 0 }, bodyColor[3] = { 1, 1, 0 }, headColor[3] = {1, 1, 1},
-		elbowColor[3], kneeColor[3], jointsColor[3];
+int legColor[3] = { 1, 0, 0 }, handColor[3] = { 0, 1, 0 }, bodyColor[3] = { 1, 1, 0 }, headColor[3] = { 1, 1, 1 },
+elbowColor[3], kneeColor[3], jointsColor[3];
 
-	float leftLegBottom[2], leftKnee,
-		rightLegBottom[2], rightKnee,
-		leftHandBottom[2], leftElbow,
-		rightHandBottom[2], rightElbow,
-		head[2];
+float leftLegBottom[2], leftKnee,
+rightLegBottom[2], rightKnee,
+leftHandBottom[2], leftElbow,
+rightHandBottom[2], rightElbow,
+head[2];
 //}man;
-	float direction, offset, distChange;
-	int onceRound, handup = 0;
+float direction, offset, distChange;
+int onceRound, handup = 0;
 
 void initMan(int x, int y)
 {
@@ -30,7 +30,7 @@ void initMan(int x, int y)
 	posY = y;
 	upperBodyWidth = legWidth * 2 + legGap;
 	leftLegBottom[0] = leftKnee = posX;
-	leftLegBottom[1] = rightLegBottom[1]  = posY - legHeight;
+	leftLegBottom[1] = rightLegBottom[1] = posY - legHeight;
 	rightLegBottom[0] = posX + legWidth + legGap;
 	rightKnee = posX + legGap + legWidth;
 
@@ -109,9 +109,9 @@ void riverMask(int y)
 	glColor3f(0.17, 0.38, 0.49);
 	glVertex2f(leftElbow - handWidth, 0);
 	glColor3f(0.17, 0.38, 0.49);
-	glVertex2f(rightElbow + handWidth, 0);
-	glColor3f(0.000, 1.000 * 130 / 250.0 + 0.2,0.2 + 1.000 * 130 / 250.0);
-	glVertex2f(rightElbow + handWidth, y);
+	glVertex2f(rightElbow + handWidth + 100, 0);
+	glColor3f(0.000, 1.000 * 130 / 250.0 + 0.2, 0.2 + 1.000 * 130 / 250.0);
+	glVertex2f(rightElbow + handWidth + 100, y);
 	glEnd();
 }
 
@@ -135,8 +135,8 @@ int jumpAction()
 		leftKnee += 0.05;
 		direction += 0.05;
 		offset -= 0.1;
-		leftLegBottom[1] += 0.1;
-		rightLegBottom[1] += 0.1;
+		leftLegBottom[1] += 0.05;
+		rightLegBottom[1] += 0.05;
 		return 0;
 	}
 	else if (offset < 0)

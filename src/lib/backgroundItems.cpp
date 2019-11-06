@@ -4,14 +4,14 @@ void drawRiver(int y)
 {
 	//glColor3f(0.23, 0.70, 0.81);
 	glColor3f(0.17, 0.38, 0.49);
-    glBegin(GL_POLYGON);
-    glVertex2f(0,0);
-    glColor3f(0.000, 1.000, 1.000);
-    glVertex2f(0,y);
-    glVertex2f(glutGet(GLUT_WINDOW_WIDTH),y);
-    glColor3f(0.17, 0.38, 0.49);
-    glVertex2f(glutGet(GLUT_WINDOW_WIDTH),0);
-    glEnd();
+	glBegin(GL_POLYGON);
+	glVertex2f(0, 0);
+	glColor3f(0.000, 1.000, 1.000);
+	glVertex2f(0, y);
+	glVertex2f(glutGet(GLUT_WINDOW_WIDTH), y);
+	glColor3f(0.17, 0.38, 0.49);
+	glVertex2f(glutGet(GLUT_WINDOW_WIDTH), 0);
+	glEnd();
 	//glRectd(0, 0, glutGet(GLUT_WINDOW_WIDTH), y);
 }
 void drawLand(int y)
