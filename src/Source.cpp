@@ -22,8 +22,8 @@ void changeViewPort(int w, int h)
 
 void drawSemiCircle1(float radius, int x, int y)
 {
-	//glColor3f(0.23, 0.7, 0.81);
-	glColor3f(0, 0.5, 1);
+	glColor3f(0.23, 0.7, 0.81);
+	// glColor3f(0, 0.5, 1);
 	glPointSize(3);
 	glBegin(GL_POINTS);
 	for (float i = 0; i < 3.14; i += 0.001)
@@ -36,8 +36,8 @@ void drawSemiCircle1(float radius, int x, int y)
 
 void drawSemiCircle2(float radius, int x, int y)
 {
-	//glColor3f(0.23, 0.7, 0.81);
-	glColor3f(0, 0.5, 1);
+	glColor3f(0.23, 0.7, 0.81);
+	// glColor3f(0, 0.5, 1);
 	glPointSize(3);
 	glBegin(GL_POINTS);
 	for (float i = 3.14; i < 6.28; i += 0.001)
